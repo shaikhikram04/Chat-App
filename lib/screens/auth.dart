@@ -22,6 +22,7 @@ class _AuthScreenState extends State<AuthScreen> {
   var _isLogin = true;
   var _enteredEmail = '';
   var _enteredPassword = '';
+  var _enteredUsername = '';
   File? _selectedImage;
   var _isAuthenticating = false;
 
@@ -61,7 +62,7 @@ class _AuthScreenState extends State<AuthScreen> {
             .collection('users')
             .doc(userCredentials.user!.uid)
             .set({
-          'username': 'to be done...',
+          'username': _enteredUsername,
           'email': _enteredEmail,
           'image_url': imageURL,
         });
@@ -113,7 +114,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             UserImagePicker(onPickedImage: _onPickedImage),
                           TextFormField(
                             decoration: const InputDecoration(
-                              label: Text('Email Address'),
+                              labelText: 'Email Address',
                             ),
                             keyboardType: TextInputType.emailAddress,
                             autocorrect: false,
@@ -130,9 +131,26 @@ class _AuthScreenState extends State<AuthScreen> {
                               _enteredEmail = email!;
                             },
                           ),
+                          if (!_isLogin)
+                            TextFormField(
+                              decoration: const InputDecoration(
+                                labelText: 'Username',
+                              ),
+                              validator: (value) {
+                                if (value == null ||
+                                    value.isEmpty ||
+                                    value.trim().length < 4) {
+                                  return 'Please enter at least 4 characters.';
+                                }
+                                return null;
+                              },
+                              onSaved: (newValue) {
+                                _enteredUsername = newValue!;
+                              },
+                            ),
                           TextFormField(
                             decoration: InputDecoration(
-                              label: const Text('Password'),
+                              labelText: 'Password',
                               suffixIcon: IconButton(
                                   onPressed: () {
                                     setState(() {
