@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  //* Ensures that the Flutter framework is properly initialized before any other operations
   WidgetsFlutterBinding.ensureInitialized();
+
+  //* Asynchronously initializes the Firebase app with platform-specific options
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
