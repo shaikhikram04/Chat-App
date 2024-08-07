@@ -1,8 +1,9 @@
 import 'package:chat_app/widgets/chat_messages.dart';
 import 'package:chat_app/widgets/new_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+
+// import 'package:firebase_messaging/firebase_messaging.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -12,19 +13,19 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  void setupPushNotification() async {
-    final fbm = FirebaseMessaging.instance;
+  // void setupPushNotification() async {
+  //   final fbm = FirebaseMessaging.instance;
 
-    await fbm.requestPermission();
+  //   await fbm.requestPermission();
 
-    fbm.subscribeToTopic('chat');
-  }
+  //   fbm.subscribeToTopic('chat');
+  // }
 
-  @override
-  void initState() {
-    super.initState();
-    setupPushNotification();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   setupPushNotification();
+  // }
 
   @override
   Widget build(BuildContext context) {
